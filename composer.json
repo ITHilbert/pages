@@ -19,7 +19,7 @@
     "autoload": {
         "psr-4": {
             "ITHilbert\\Pages\\": "src/",
-            "ITHilbert\\UserAuth\\Database\\Seeds\\": "Database/Seeders/"
+            "ITHilbert\\Pages\\Database\\Seeds\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {

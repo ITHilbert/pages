@@ -46,19 +46,20 @@ Route::prefix('sitemap')
 /*########################################
 # Show Page
 ########################################*/
+/* //Wird erst aufgerufen, wenn keine andere Route gefunden wurde
 $show_pages_prefix = config('pages.route_show_pages_prefix');
+Route::middleware(config('pages.route_show_pages_middleware'))
+    ->group(function () use ($show_pages_prefix) {
 
-if ($show_pages_prefix != '' && $show_pages_prefix != '/'){
-    Route::middleware(config('pages.route_show_pages_middleware'))
-        ->prefix(config('pages.route_show_pages_prefix'))
-        ->group(function () {
+        // Andere Routen hier definieren
 
-            Route::get('{url}',          [PagesController::class, 'show'])->name('page.show');
-    });
-}else{
-    Route::middleware(config('pages.route_show_pages_middleware'))
-        ->group(function () {
-
-            Route::get('{url}',          [PagesController::class, 'show'])->name('page.show');
-    });
-}
+        Route::fallback(function () use ($show_pages_prefix) {
+            if ($show_pages_prefix != '' && $show_pages_prefix != '/') {
+                Route::prefix($show_pages_prefix)->group(function () {
+                    Route::get('{url}', [PagesController::class, 'show'])->name('page.show');
+                });
+            } else {
+                Route::get('{url}', [PagesController::class, 'show'])->name('page.show');
+            }
+        });
+    }); */

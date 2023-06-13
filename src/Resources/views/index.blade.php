@@ -13,10 +13,11 @@
             <tr>
                 <th>ID</th>
                 <th>Titel</th>
+                <th>URL</th>
                 <th>Kategorie</th>
                 <th>Created At</th>
                 <th>Updated At</th>
-                <th width="160px">
+                <th width="200px">
                     <button-create route="{{ route('pages.create') }}">Neue Seite</button-create>
                 </th>
             </tr>
@@ -39,6 +40,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'title', name: 'title' },
+                { data: 'url', name: 'url' },
                 { data: 'category', name: 'category' },
                 { data: 'created_at', name: 'created_at' },
                 { data: 'updated_at', name: 'updated_at' },

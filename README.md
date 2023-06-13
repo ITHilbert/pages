@@ -1,41 +1,42 @@
 # Pages
+Mit der Komponente kann ich Pages erstellen, bearbeiten und löschen sowie ausgeben.
+Weiterhin gibt es die Möglichkeit eine Sitemap auszugeben entweder für alles oder nach Kategorie.
 
-Mit der Komponente kann ich Artikel erstellen, bearbeiten und löschen und ausgeben.
-
+## Vorraussetzungen 
+- Laravelkit
 
 ## Installation
 ```
-cd packages
-git clone https://github.com/ITHilbert/Site.git
+composer require ithilbert/pages
+
+#Tabelle pages erstellen
+php artisan migrate
+
+//Daten kopieren
+php artisan vendor:publish --provider="ITHilbert\Pages\PagesServiceProvider" --force
 ```
 
-### Composer
+### config/app
 ```
-"autoload": {
-     "psr-4": {
-         "App\\": "app/",
-         "ITHilbert\\": "packages/",
-         "ITHilbert\\Site\\": "packages/site/src/"
-     }
-},
-```
-
-### config/app.php
-Den Punkt Providers um folgenden Eintrag ergänzen:
-```
-\ITHilbert\Site\SiteServiceProvider::class,
+'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+        ...
+        \ITHilbert\Pages\PagesServiceProvider::class,
 ```
 
-### Git löschen
-```
-cd packages/site
-rm -Rf .git
-```
-
-### ToDo
+### config/pages.php
+Hier können Sie defeinieren wie die Pages Komponente arbeiten soll
 
 
-### Author
+## Anmerkungen 
+Das anzeigen der Page wird im ITHilbert\Pages\Providers\RoutesServiceProvider.php behandelt.
+
+## ToDo
+
+
+## Author
 IT-Hilbert GmbH
 
 Access, Excel, VBA und Web Programmierungen

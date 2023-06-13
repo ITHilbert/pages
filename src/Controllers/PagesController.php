@@ -9,12 +9,12 @@ use Illuminate\Routing\Controller;
 use ITHilbert\Pages\Models\Page;
 use ITHilbert\LaravelKit\Helpers\HButton;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
 
     public function show($url){
-        //dd($url);
         $page = Page::where('url', $url)->first();
 
         $breadcrumb = new Breadcrumb();
@@ -28,9 +28,16 @@ class PagesController extends Controller
 
         if ($request->ajax()) {
             return Datatables::of($data)
+                ->editColumn('created_at', function ($row) {
+                    return Carbon::parse($row->created_at)->format('d.m.Y H:i:s');
+                })
+                ->editColumn('updated_at', function ($row) {
+                    return Carbon::parse($row->updated_at)->format('d.m.Y H:i:s');
+                })
                 ->addColumn('action', function ($row) { //use ($user) {
                     $ausgabe = '<div style="white-space: nowrap;">';
-                    //$ausgabe .= HButton::show(route('permission.show', $row->id), '');
+
+                    $ausgabe .= HButton::show(Page::getURL($row)  , '');
                     //if($user->hasPermission('user_edit')){
                         $ausgabe .= HButton::edit(route('pages.edit', $row->id), '');
                     //}

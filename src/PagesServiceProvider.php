@@ -4,6 +4,7 @@ namespace ITHilbert\Pages;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use ITHilbert\Pages\Providers\RouteServiceProvider;
 
 class PagesServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,8 @@ class PagesServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
 
-
-        \Livewire\Livewire::component('pages::page', \ITHilbert\Pages\Livewire\PageComponent::class);
-        \Livewire\Livewire::component('pages::liste', \ITHilbert\Pages\Livewire\ListeComponent::class);
+        //Mein Service Provider Hier erfolgt das routing für das anzeigen der Pages
+        $this->app->register(RouteServiceProvider::class);
     }
 
 
@@ -86,7 +86,7 @@ class PagesServiceProvider extends ServiceProvider
 
         //Show Page kopieren
         $this->publishes([
-            __DIR__ .'/Resources/views/show.blade.php' => resource_path('vendor/pages/show.blade.php'),
+            __DIR__ .'/Resources/views/show.blade.php' => resource_path('views/vendor/pages/show.blade.php'),
         ]);
 
     }
