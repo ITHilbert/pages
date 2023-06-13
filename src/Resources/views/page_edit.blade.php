@@ -9,6 +9,7 @@
         <card-body>
             @include('include.message')
             <div>
+                <input-hidden id="use_category_as_prefix" value="{{ config('pages.use_category_as_prefix') }}"></input-hidden>
                 <hform action="{{ $formroute }}">
                     {{-- Seiten Tittel --}}
                     <div class="form-group row mb-2">
@@ -178,9 +179,34 @@ function slugify(text) {
     // Eventlistener hinzufügen, um die updated-Funktion aufzurufen, wenn sich der Inhalt des Titel-Feldes ändert
     titleField.addEventListener('input', function() {
         // Aktualisiere die Werte der DOM-Elemente
-        document.getElementById('url').value = slugify(titleField.value);
+        if(document.getElementById('use_category_as_prefix').value == 1){
+            if(document.getElementById('category').value != 'main'){
+                document.getElementById('url').value = document.getElementById('category').value + "/" + slugify(titleField.value);
+            }else{
+                document.getElementById('url').value = slugify(titleField.value);
+            }
+        }else{
+            document.getElementById('url').value = slugify(titleField.value);
+        }
         document.getElementById('meta_title').value = titleField.value;
         document.getElementById('meta_keywords').value = titleField.value;
+    });
+
+    // Element auswählen, das das Titel-Feld repräsentiert
+    const categoryField = document.getElementById('category');
+
+    // Eventlistener hinzufügen, um die updated-Funktion aufzurufen, wenn sich der Inhalt des Titel-Feldes ändert
+    categoryField.addEventListener('change', function() {
+        // Aktualisiere die Werte der DOM-Elemente
+        if(document.getElementById('use_category_as_prefix').value == 1){
+            if(document.getElementById('category').value != 'main'){
+                document.getElementById('url').value = document.getElementById('category').value + "/" + slugify(titleField.value);
+            }else{
+                document.getElementById('url').value = slugify(titleField.value);
+            }
+        }else{
+            document.getElementById('url').value = slugify(titleField.value);
+        }
     });
 </script>
 @stop

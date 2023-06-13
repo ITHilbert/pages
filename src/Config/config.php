@@ -10,6 +10,8 @@ return [
     'default_group' => 'article',
     'default_robots' => 'all',
 
+    'use_category_as_prefix' => true,           //Damit wird die URL aus categories/title gebildet
+
     //Sitemap default config
     'sitemap_default_show' => true,
     'sitemap_default_priority' => 0.6,
