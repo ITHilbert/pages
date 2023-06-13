@@ -34,7 +34,7 @@ class Page extends Model
             $url .= $page->url;
         }else{
             //Domain + url aus DB
-            $url .= $page->url;
+            $url .=   $page->url;
         }
 
         return $url;

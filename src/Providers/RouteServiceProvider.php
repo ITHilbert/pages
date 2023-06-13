@@ -11,7 +11,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::fallback(function () {
             $url = request()->getPathInfo();
-            $url = ltrim($url, '/');
+            $url = ltrim($url, '/'); //Führendes / entfernen
+
+            //Wenn Präfix vorhanden ist, aus route entfernen
+            $prefix = config('pages.route_show_pages_prefix') ."/";
+            if($prefix != '' && $prefix != '/'){
+                $url = str_replace($prefix, "", $url);
+            }
             $url = urldecode($url); // URL decodieren
             $page = \ITHilbert\Pages\Models\Page::where('url', $url)->first();
 
