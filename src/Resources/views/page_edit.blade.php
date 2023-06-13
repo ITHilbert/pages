@@ -4,7 +4,7 @@
     <card-main>
         <card-main-header>
             <h1>Seite bearbeiten</h1>
-            @include('components.breadcrumb')
+            @include('include.breadcrumb')
         </card-main-header>
         <card-body>
             @include('include.message')

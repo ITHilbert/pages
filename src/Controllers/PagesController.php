@@ -2,7 +2,7 @@
 
 namespace ITHilbert\Pages\Controllers;
 
-use App\Helpers\Breadcrumb;
+use ITHilbert\LaravelKit\Helpers\Breadcrumb;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;

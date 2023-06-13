@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
                 abort(404); // Seite nicht gefunden, wirft einen 404-Fehler
             }
 
-            $breadcrumb = new \App\Helpers\Breadcrumb();
+            $breadcrumb = new \ITHilbert\LaravelKit\Helpers\Breadcrumb();
             $breadcrumb->add($page->title);
 
             return view('pages::show')->with(compact('breadcrumb', 'page'));

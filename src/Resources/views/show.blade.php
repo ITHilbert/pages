@@ -9,7 +9,7 @@
     <card-main>
         <card-main-header>
             <h1>{{ $page->title }}</h1>
-            @include('components.breadcrumb')
+            @include('include.breadcrumb')
         </card-main-header>
         <card-body>
             {!! $page->content !!}
